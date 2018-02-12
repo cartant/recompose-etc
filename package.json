@@ -1,0 +1,68 @@
+{
+  "author": "Nicholas Jamieson <nicholas@cartant.com>",
+  "bugs": {
+    "url": "https://github.com/cartant/recompose-etc/issues"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "recompose": "^0.26.0",
+    "rxjs": "^5.5.6"
+  },
+  "description": "React function components and higher-order components based on recompose and RxJS",
+  "devDependencies": {
+    "@types/enzyme": "^3.1.8",
+    "@types/jest": "^22.1.2",
+    "@types/react": "^16.0.36",
+    "@types/recompose": "^0.24.4",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.2.2",
+    "react-dom": "^16.2.0",
+    "react-test-renderer": "^16.2.0",
+    "ts-jest": "^22.0.4",
+    "typescript": "~2.7.1"
+  },
+  "esm2015": "./dist/esm2015/index.js",
+  "homepage": "https://github.com/cartant/recompose-etc",
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "setupTestFrameworkScriptFile": "./setupTestFramework.js",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
+  },
+  "keywords": [
+    "observable",
+    "react",
+    "recompose",
+    "rxjs"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/esm5/index.js",
+  "name": "recompose-etc",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "react": "^16.2.0",
+    "rxjs": "^5.5.6"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cartant/recompose-etc.git"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "types": "./dist/index.d.ts",
+  "unpkg": "./bundles/recompose-etc.min.umd.js",
+  "version": "0.0.0"
+}
