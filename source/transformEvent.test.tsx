@@ -6,7 +6,7 @@ import { mapTo } from "rxjs/operators/mapTo";
 import { transformEvent } from "./TransformEvent";
 
 type Event = React.MouseEvent<HTMLButtonElement>;
-const Component = transformEvent((event$: Observable<Event>) => event$.pipe(mapTo({
+const Transform = transformEvent((event$: Observable<Event>) => event$.pipe(mapTo({
   name: "click",
   transformed: true
 })));
@@ -14,7 +14,7 @@ const Component = transformEvent((event$: Observable<Event>) => event$.pipe(mapT
 [{
   description: "using the render prop",
   factory: (handleClick: (event: any) => void) => (
-    <Component
+    <Transform
       handler={handleClick}
       render={({ handler }) => <button id="button" onClick={handler}></button>}
     />
@@ -22,7 +22,7 @@ const Component = transformEvent((event$: Observable<Event>) => event$.pipe(mapT
 }, {
   description: "using the children prop",
   factory: (handleClick: (event: any) => void) => (
-    <Component
+    <Transform
       children={({ handler }) => <button id="button" onClick={handler}></button>}
       handler={handleClick}
     />
@@ -30,9 +30,9 @@ const Component = transformEvent((event$: Observable<Event>) => event$.pipe(mapT
 }, {
   description: "using implicit children",
   factory: (handleClick: (event: any) => void) => (
-    <Component handler={handleClick}>
-      {({ handler }: typeof Component.Props) => <button id="button" onClick={handler}></button>}
-    </Component>
+    <Transform handler={handleClick}>
+      {({ handler }: typeof Transform.Props) => <button id="button" onClick={handler}></button>}
+    </Transform>
   )
 }].forEach(({ description, factory }) => {
 
