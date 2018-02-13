@@ -16,7 +16,7 @@ export function transformProps<TProps, TRenderProps>(
   propsToReactNode: mapper<Subscribable<TProps>, Observable<TRenderProps>>
 ): React.ComponentType<TProps & { [key in "children" | "render"]?: (props: TRenderProps) => React.ReactNode }> & { Props: TRenderProps } {
   const componentFromStream = componentFromStreamWithConfig(rxjsObservableConfig);
-  const Component = componentFromStream<TProps & { [key in "children" | "render"]: (props: TRenderProps) => React.ReactNode }>(
+  const Component = componentFromStream<TProps & { [key in "children" | "render"]?: (props: TRenderProps) => React.ReactNode }>(
     props$ => from(propsToReactNode(props$)).pipe(
       withLatestFrom(props$),
       map(([renderProps, props]) => {
