@@ -17,20 +17,32 @@ import { rxjsObservableConfig } from "./rxjsObservableConfig";
 
 export function transformEvent<TInnerEvent, TOuterEvent>(
   transform: mapper<Observable<TInnerEvent>, Observable<TOuterEvent>>
-): React.ComponentType<{
-  children?: (props: { handler: (event: TInnerEvent) => void }) => React.ReactNode,
-  handler: (event: TOuterEvent) => void
-}> & { ChildProps: { handler: (event: TInnerEvent) => void } } {
+): React.ComponentType<
+  { handler: (event: TOuterEvent) => void } &
+  { [key in "children" | "render"]?: (props: { handler: (event: TInnerEvent) => void }) => React.ReactNode }
+> & { Props: { handler: (event: TInnerEvent) => void } } {
   const createEventHandler = createEventHandlerWithConfig(rxjsObservableConfig);
   const componentFromStream = componentFromStreamWithConfig(rxjsObservableConfig);
   const { handler: innerHandler, stream: innerEvent$ } = createEventHandler();
-  const Component = componentFromStream<{
-    children?: (props: { handler: (event: TInnerEvent) => void }) => React.ReactNode,
-    handler: (event: TOuterEvent) => void
-  }>(props$ => {
+  const Component = componentFromStream<
+    { handler: (event: TOuterEvent) => void } &
+    { [key in "children" | "render"]?: (props: { handler: (event: TInnerEvent) => void }) => React.ReactNode }
+  >(props$ => {
     return merge(
       from(props$).pipe(
-        map(({ children }) => children!({ handler: innerHandler }))
+        map(props => {
+          if (process.env.NODE_ENV !== "production") {
+            if (!props.render && !props.children) {
+              /*tslint:disable*/
+              console.error(
+                "A component created by `transformEvent()` was passed neither a " +
+                "`render` property nor a `children` property."
+              );
+              /*tslint:enable*/
+            }
+          }
+          return (props.render || props.children)({ handler: innerHandler });
+        })
       ),
       transform(from(innerEvent$)).pipe(
         withLatestFrom(props$),

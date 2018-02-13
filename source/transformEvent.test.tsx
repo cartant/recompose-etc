@@ -24,7 +24,7 @@ it("should transform an event using implicit children", () => {
   let receivedEvent: any= null;
   const wrapper = shallow(
     <Component handler={event => { receivedEvent = event; }}>
-      {({ handler }) => <button id="button" onClick={handler}></button>}
+      {({ handler }: typeof Component.Props) => <button id="button" onClick={handler}></button>}
     </Component>
   );
   wrapper.find("#button").simulate("click");
@@ -44,7 +44,7 @@ it("should render correctly using the children prop", () => {
 it("should render correctly using implicit children", () => {
   const rendering = renderer.create(
     <Component handler={() => {}}>
-      {({ handler }) => <button id="button" onClick={handler}></button>}
+      {({ handler }: typeof Component.Props) => <button id="button" onClick={handler}></button>}
     </Component>
   ).toJSON();
   expect(rendering).toMatchSnapshot();
