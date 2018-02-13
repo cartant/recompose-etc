@@ -1,6 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render correctly 1`] = `
+exports[`withChildren should render correctly 1`] = `
+<div>
+  Count: 
+  0
+  <button
+    id="increment"
+    onClick={[Function]}
+  >
+    +
+  </button>
+  <button
+    id="decrement"
+    onClick={[Function]}
+  >
+    -
+  </button>
+</div>
+`;
+
+exports[`withProp should render correctly 1`] = `
 <div>
   Count: 
   0

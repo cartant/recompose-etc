@@ -5,7 +5,7 @@ import { componentWithRenderFromStream } from "./componentWithRenderFromStream";
 import { counterPropsFromStream } from "./testing/counter";
 
 const Counter = componentWithRenderFromStream(counterPropsFromStream);
-const element = () => (
+const factory = () => (
   <Counter
     render={({ count, increment, decrement }) => (
       <div>
@@ -18,24 +18,24 @@ const element = () => (
 );
 
 it("should render without crashing", () => {
-  shallow(element());
+  shallow(factory());
 });
 
 it("should increment the counter", () => {
-  const wrapper = shallow(element());
+  const wrapper = shallow(factory());
   expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 0/));
   wrapper.find("#increment").simulate("click");
   expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 1/));
 });
 
 it("should decrement the counter", () => {
-  const wrapper = shallow(element());
+  const wrapper = shallow(factory());
   expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 0/));
   wrapper.find("#decrement").simulate("click");
   expect(wrapper.html()).toEqual(expect.stringMatching(/Count: -1/));
 });
 
 it("should render correctly", () => {
-  const rendering = renderer.create(element()).toJSON();
+  const rendering = renderer.create(factory()).toJSON();
   expect(rendering).toMatchSnapshot();
 });

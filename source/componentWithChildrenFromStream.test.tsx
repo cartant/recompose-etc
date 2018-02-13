@@ -5,35 +5,60 @@ import { componentWithChildrenFromStream } from "./componentWithChildrenFromStre
 import { counterPropsFromStream } from "./testing/counter";
 
 const Counter = componentWithChildrenFromStream(counterPropsFromStream);
-const element = () => (
+const factoryWithChildren = () => (
   <Counter>
-    {({ count, increment, decrement }: typeof Counter.ChildProps) => (<div>
-      Count: {count}
-      <button id="increment" onClick={increment}>+</button>
-      <button id="decrement" onClick={decrement}>-</button>
-    </div>)}
+    {({ count, increment, decrement }: typeof Counter.ChildProps) => (
+      <div>
+        Count: {count}
+        <button id="increment" onClick={increment}>+</button>
+        <button id="decrement" onClick={decrement}>-</button>
+      </div>
+    )}
   </Counter>
 );
+const factoryWithProp = () => (
+  <Counter
+    children={({ count, increment, decrement }) => (
+      <div>
+        Count: {count}
+        <button id="increment" onClick={increment}>+</button>
+        <button id="decrement" onClick={decrement}>-</button>
+      </div>
+    )}
+  />
+);
 
-it("should render without crashing", () => {
-  shallow(element());
-});
+[{
+  description: "withChildren",
+  factory: factoryWithChildren
+}, {
+  description: "withProp",
+  factory: factoryWithProp
+}].forEach(({ description, factory }) => {
 
-it("should increment the counter", () => {
-  const wrapper = shallow(element());
-  expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 0/));
-  wrapper.find("#increment").simulate("click");
-  expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 1/));
-});
+  describe(description, () => {
 
-it("should decrement the counter", () => {
-  const wrapper = shallow(element());
-  expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 0/));
-  wrapper.find("#decrement").simulate("click");
-  expect(wrapper.html()).toEqual(expect.stringMatching(/Count: -1/));
-});
+    it("should render without crashing", () => {
+      shallow(factory());
+    });
 
-it("should render correctly", () => {
-  const rendering = renderer.create(element()).toJSON();
-  expect(rendering).toMatchSnapshot();
+    it("should increment the counter", () => {
+      const wrapper = shallow(factory());
+      expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 0/));
+      wrapper.find("#increment").simulate("click");
+      expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 1/));
+    });
+
+    it("should decrement the counter", () => {
+      const wrapper = shallow(factory());
+      expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 0/));
+      wrapper.find("#decrement").simulate("click");
+      expect(wrapper.html()).toEqual(expect.stringMatching(/Count: -1/));
+    });
+
+    it("should render correctly", () => {
+      const rendering = renderer.create(factory()).toJSON();
+      expect(rendering).toMatchSnapshot();
+    });
+  });
 });
