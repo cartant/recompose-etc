@@ -14,19 +14,20 @@ import { map } from "rxjs/operators/map";
 import { tap } from "rxjs/operators/tap";
 import { withLatestFrom } from "rxjs/operators/withLatestFrom";
 import { rxjsObservableConfig } from "./rxjsObservableConfig";
+import { HandlerProp, RenderProp } from "./types";
 
 export function transformEvent<TInnerEvent, TOuterEvent>(
   transform: mapper<Observable<TInnerEvent>, Observable<TOuterEvent>>
 ): React.ComponentType<
-  { handler: (event: TOuterEvent) => void } &
-  { [key in "children" | "render"]?: (props: { handler: (event: TInnerEvent) => void }) => React.ReactNode }
-> & { Props: { handler: (event: TInnerEvent) => void } } {
+  HandlerProp<TOuterEvent> &
+  RenderProp<HandlerProp<TInnerEvent>>
+> & { Props: HandlerProp<TInnerEvent> } {
   const createEventHandler = createEventHandlerWithConfig(rxjsObservableConfig);
   const componentFromStream = componentFromStreamWithConfig(rxjsObservableConfig);
   const { handler: innerHandler, stream: innerEvent$ } = createEventHandler();
   const Component = componentFromStream<
-    { handler: (event: TOuterEvent) => void } &
-    { [key in "children" | "render"]?: (props: { handler: (event: TInnerEvent) => void }) => React.ReactNode }
+    HandlerProp<TOuterEvent> &
+    RenderProp<HandlerProp<TInnerEvent>>
   >(props$ => {
     return merge(
       from(props$).pipe(

@@ -11,12 +11,13 @@ import { from } from "rxjs/observable/from";
 import { map } from "rxjs/operators/map";
 import { withLatestFrom } from "rxjs/operators/withLatestFrom";
 import { rxjsObservableConfig } from "./rxjsObservableConfig";
+import { RenderProp } from "./types";
 
 export function transformProps<TProps, TRenderProps>(
   propsToReactNode: mapper<Subscribable<TProps>, Observable<TRenderProps>>
-): React.ComponentType<TProps & { [key in "children" | "render"]?: (props: TRenderProps) => React.ReactNode }> & { Props: TRenderProps } {
+): React.ComponentType<TProps & RenderProp<TRenderProps>> & { Props: TRenderProps } {
   const componentFromStream = componentFromStreamWithConfig(rxjsObservableConfig);
-  const Component = componentFromStream<TProps & { [key in "children" | "render"]?: (props: TRenderProps) => React.ReactNode }>(
+  const Component = componentFromStream<TProps & RenderProp<TRenderProps>>(
     props$ => from(propsToReactNode(props$)).pipe(
       withLatestFrom(props$),
       map(([renderProps, props]) => {
