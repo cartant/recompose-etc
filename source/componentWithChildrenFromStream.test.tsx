@@ -29,10 +29,10 @@ const factoryWithProp = () => (
 );
 
 [{
-  description: "withChildren",
+  description: "using implicit children",
   factory: factoryWithChildren
 }, {
-  description: "withProp",
+  description: "using the children prop",
   factory: factoryWithProp
 }].forEach(({ description, factory }) => {
 
