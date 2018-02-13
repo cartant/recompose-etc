@@ -18,6 +18,7 @@
     "react-test-renderer": "^16.2.0",
     "recompose": "^0.26.0",
     "rxjs": "^5.5.6",
+    "rxjs-marbles": "^2.3.0",
     "ts-jest": "^22.0.4",
     "typescript": "~2.7.1"
   },
