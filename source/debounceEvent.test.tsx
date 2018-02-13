@@ -94,3 +94,29 @@ describe("distinct using comparer", () => {
     expect(changeEvents).toEqual([{ target: { value: "123" } }]);
   }));
 });
+
+describe("distinct and mapped", () => {
+
+  type Event = React.ChangeEvent<HTMLInputElement>;
+  const Debounce = debounceEvent<Event, string>(100, true, event => event.target.value);
+
+  it("should debounce events", marbles((m) => {
+    m.bind();
+    let changeEvents: any[] = [];
+    const wrapper = shallow(
+      <Debounce
+        handler={event => changeEvents.push(event)}
+        render={({ handler }) => <input id="input" onChange={handler} type="text" />}
+      />
+    );
+    wrapper.find("#input").simulate("change", { target: { value: "1" } });
+    wrapper.find("#input").simulate("change", { target: { value: "12" } });
+    wrapper.find("#input").simulate("change", { target: { value: "123" } });
+    m.scheduler.schedule(() => {
+      wrapper.find("#input").simulate("change", { target: { value: "1234" } });
+      wrapper.find("#input").simulate("change", { target: { value: "123" } });
+    }, 200);
+    m.flush();
+    expect(changeEvents).toEqual(["123"]);
+  }));
+});
