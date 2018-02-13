@@ -1,13 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render correctly using implicit children 1`] = `
+exports[`using implicit children should render correctly 1`] = `
 <button
   id="button"
   onClick={[Function]}
 />
 `;
 
-exports[`should render correctly using the children prop 1`] = `
+exports[`using the children prop should render correctly 1`] = `
+<button
+  id="button"
+  onClick={[Function]}
+/>
+`;
+
+exports[`using the render prop should render correctly 1`] = `
 <button
   id="button"
   onClick={[Function]}

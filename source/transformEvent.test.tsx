@@ -8,44 +8,44 @@ import { transformEvent } from "./TransformEvent";
 type Event = React.MouseEvent<HTMLButtonElement>;
 const Component = transformEvent((event$: Observable<Event>) => event$.pipe(mapTo({ name: "click" })));
 
-it("should transform an event using the children prop", () => {
-  let receivedEvent: any= null;
-  const wrapper = shallow(
+[{
+  description: "using the render prop",
+  factory: (state: { event: any }) => (
+    <Component
+      handler={event => { state.event = event; }}
+      render={({ handler }) => <button id="button" onClick={handler}></button>}
+    />
+  )
+}, {
+  description: "using the children prop",
+  factory: (state: { event: any }) => (
     <Component
       children={({ handler }) => <button id="button" onClick={handler}></button>}
-      handler={event => { receivedEvent = event; }}
+      handler={event => { state.event = event; }}
     />
-  );
-  wrapper.find("#button").simulate("click");
-  expect(receivedEvent).toEqual({ name: "click" });
-});
-
-it("should transform an event using implicit children", () => {
-  let receivedEvent: any= null;
-  const wrapper = shallow(
-    <Component handler={event => { receivedEvent = event; }}>
+  )
+}, {
+  description: "using implicit children",
+  factory: (state: { event: any }) => (
+    <Component handler={event => { state.event = event; }}>
       {({ handler }: typeof Component.Props) => <button id="button" onClick={handler}></button>}
     </Component>
-  );
-  wrapper.find("#button").simulate("click");
-  expect(receivedEvent).toEqual({ name: "click" });
-});
+  )
+}].forEach(({ description, factory }) => {
 
-it("should render correctly using the children prop", () => {
-  const rendering = renderer.create(
-    <Component
-      children={({ handler }) => <button id="button" onClick={handler}></button>}
-      handler={() => {}}
-    />
-  ).toJSON();
-  expect(rendering).toMatchSnapshot();
-});
+  describe(description, () => {
 
-it("should render correctly using implicit children", () => {
-  const rendering = renderer.create(
-    <Component handler={() => {}}>
-      {({ handler }: typeof Component.Props) => <button id="button" onClick={handler}></button>}
-    </Component>
-  ).toJSON();
-  expect(rendering).toMatchSnapshot();
+    it("should transform an event", () => {
+      const state = { event: null };
+      const wrapper = shallow(factory(state));
+      wrapper.find("#button").simulate("click");
+      expect(state.event).toEqual({ name: "click" });
+    });
+
+    it("should render correctly", () => {
+      const state = { event: null };
+      const rendering = renderer.create(factory(state)).toJSON();
+      expect(rendering).toMatchSnapshot();
+    });
+  });
 });
