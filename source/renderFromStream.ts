@@ -21,7 +21,19 @@ export function renderFromStream<TProps, TRenderProps>(
   const Component = componentFromStream<TProps & { [prop in RenderProps]: (props: TRenderProps) => React.ReactNode }>(
     props$ => from(propsToReactNode(props$)).pipe(
       withLatestFrom(props$),
-      map(([renderProps, props]) => (props.render || props.children)(renderProps))
+      map(([renderProps, props]) => {
+        if (process.env.NODE_ENV !== "production") {
+          if (!props.render && !props.children) {
+            /*tslint:disable*/
+            console.error(
+              "A component created by `renderFromStream()` was passed neither a " +
+              "`render` property nor a `children` property."
+            );
+            /*tslint:enable*/
+          }
+        }
+        return (props.render || props.children)(renderProps);
+      })
     )
   );
   if (process.env.NODE_ENV !== "production") {
