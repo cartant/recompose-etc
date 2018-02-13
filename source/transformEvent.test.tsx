@@ -6,28 +6,31 @@ import { mapTo } from "rxjs/operators/mapTo";
 import { transformEvent } from "./TransformEvent";
 
 type Event = React.MouseEvent<HTMLButtonElement>;
-const Component = transformEvent((event$: Observable<Event>) => event$.pipe(mapTo({ name: "click" })));
+const Component = transformEvent((event$: Observable<Event>) => event$.pipe(mapTo({
+  name: "click",
+  transformed: true
+})));
 
 [{
   description: "using the render prop",
-  factory: (state: { event: any }) => (
+  factory: (handleClick: (event: any) => void) => (
     <Component
-      handler={event => { state.event = event; }}
+      handler={handleClick}
       render={({ handler }) => <button id="button" onClick={handler}></button>}
     />
   )
 }, {
   description: "using the children prop",
-  factory: (state: { event: any }) => (
+  factory: (handleClick: (event: any) => void) => (
     <Component
       children={({ handler }) => <button id="button" onClick={handler}></button>}
-      handler={event => { state.event = event; }}
+      handler={handleClick}
     />
   )
 }, {
   description: "using implicit children",
-  factory: (state: { event: any }) => (
-    <Component handler={event => { state.event = event; }}>
+  factory: (handleClick: (event: any) => void) => (
+    <Component handler={handleClick}>
       {({ handler }: typeof Component.Props) => <button id="button" onClick={handler}></button>}
     </Component>
   )
@@ -36,15 +39,17 @@ const Component = transformEvent((event$: Observable<Event>) => event$.pipe(mapT
   describe(description, () => {
 
     it("should transform an event", () => {
-      const state = { event: null };
-      const wrapper = shallow(factory(state));
+      let clickEvent: any = null;
+      const wrapper = shallow(factory(event => clickEvent = event));
       wrapper.find("#button").simulate("click");
-      expect(state.event).toEqual({ name: "click" });
+      expect(clickEvent).toEqual({
+        name: "click",
+        transformed: true
+      });
     });
 
     it("should render correctly", () => {
-      const state = { event: null };
-      const rendering = renderer.create(factory(state)).toJSON();
+      const rendering = renderer.create(factory(() => {})).toJSON();
       expect(rendering).toMatchSnapshot();
     });
   });
