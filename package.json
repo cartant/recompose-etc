@@ -3,11 +3,7 @@
   "bugs": {
     "url": "https://github.com/cartant/recompose-etc/issues"
   },
-  "dependencies": {
-    "react": "^16.2.0",
-    "recompose": "^0.26.0",
-    "rxjs": "^5.5.6"
-  },
+  "dependencies": {},
   "description": "React function components and higher-order components based on recompose and RxJS",
   "devDependencies": {
     "@types/enzyme": "^3.1.8",
@@ -17,8 +13,11 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "jest": "^22.2.2",
+    "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
+    "recompose": "^0.26.0",
+    "rxjs": "^5.5.6",
     "ts-jest": "^22.0.4",
     "typescript": "~2.7.1"
   },
@@ -52,6 +51,7 @@
   "optionalDependencies": {},
   "peerDependencies": {
     "react": "^16.2.0",
+    "recompose": "^0.26.0",
     "rxjs": "^5.5.6"
   },
   "private": true,
