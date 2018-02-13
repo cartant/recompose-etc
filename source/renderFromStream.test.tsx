@@ -33,7 +33,7 @@ const Counter = renderFromStream(counterPropsFromStream);
     />
   )
 }, {
-  description: "using the implicit children",
+  description: "using implicit children",
   factory: () => (
     <Counter>
       {({ count, increment, decrement }: typeof Counter.Props) => (
