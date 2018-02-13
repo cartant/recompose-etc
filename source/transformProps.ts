@@ -12,14 +12,28 @@ import { map } from "rxjs/operators/map";
 import { withLatestFrom } from "rxjs/operators/withLatestFrom";
 import { rxjsObservableConfig } from "./rxjsObservableConfig";
 
-export function transformProps<TOuterProps, TInnerProps>(
-  transform: mapper<Observable<TOuterProps>, Observable<TInnerProps>>
-): React.ComponentType<TInnerProps> & { ChildProps: TInnerProps } {
+export type RenderPropKeys = "children" | "render";
+
+export function transformProps<TProps, TRenderProps>(
+  propsToReactNode: mapper<Subscribable<TProps>, Observable<TRenderProps>>
+): React.ComponentType<TProps & { [prop in RenderPropKeys]?: (props: TRenderProps) => React.ReactNode }> & { Props: TRenderProps } {
   const componentFromStream = componentFromStreamWithConfig(rxjsObservableConfig);
-  const Component = componentFromStream<TOuterProps & { children?: (props: TInnerProps) => React.ReactNode }>(
-    props$ => transform(from(props$)).pipe(
+  const Component = componentFromStream<TProps & { [prop in RenderPropKeys]: (props: TRenderProps) => React.ReactNode }>(
+    props$ => from(propsToReactNode(props$)).pipe(
       withLatestFrom(props$),
-      map(([innerProps, props]) => props.children!(innerProps))
+      map(([renderProps, props]) => {
+        if (process.env.NODE_ENV !== "production") {
+          if (!props.render && !props.children) {
+            /*tslint:disable*/
+            console.error(
+              "A component created by `transformProps()` was passed neither a " +
+              "`render` property nor a `children` property."
+            );
+            /*tslint:enable*/
+          }
+        }
+        return (props.render || props.children)(renderProps);
+      })
     )
   );
   if (process.env.NODE_ENV !== "production") {

@@ -1,46 +1,75 @@
 import { shallow } from "enzyme";
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import { Observable } from "rxjs";
-import { mapTo } from "rxjs/operators/mapTo";
 import { transformProps } from "./transformProps";
+import { counterPropsFromStream } from "./testing/counter";
 
-const Component = transformProps((props$: Observable<{ name: string }>) => props$.pipe(mapTo({ name: "bob" })));
+const Counter = transformProps(counterPropsFromStream);
 
-it("should transform props using the children prop", () => {
-  const wrapper = shallow(
-    <Component
-      children={({ name }) => <span>{name}</span>}
-      name={"alice"}
+[{
+  description: "using the render prop",
+  factory: () => (
+    <Counter
+      render={({ count, increment, decrement }) => (
+        <div>
+          Count: {count}
+          <button id="increment" onClick={increment}>+</button>
+          <button id="decrement" onClick={decrement}>-</button>
+        </div>
+      )}
     />
-  );
-  expect(wrapper.html()).toEqual(expect.stringMatching(/bob/));
-});
-
-it("should transform props using implicit children", () => {
-  const wrapper = shallow(
-    <Component name={"alice"}>
-      {({ name }) => <span>{name}</span>}
-    </Component>
-  );
-  expect(wrapper.html()).toEqual(expect.stringMatching(/bob/));
-});
-
-it("should render correctly using the children prop", () => {
-  const rendering = renderer.create(
-    <Component
-      children={({ name }) => <span>{name}</span>}
-      name={"alice"}
+  )
+}, {
+  description: "using the children prop",
+  factory: () => (
+    <Counter
+      children={({ count, increment, decrement }) => (
+        <div>
+          Count: {count}
+          <button id="increment" onClick={increment}>+</button>
+          <button id="decrement" onClick={decrement}>-</button>
+        </div>
+      )}
     />
-  ).toJSON();
-  expect(rendering).toMatchSnapshot();
-});
+  )
+}, {
+  description: "using implicit children",
+  factory: () => (
+    <Counter>
+      {({ count, increment, decrement }: typeof Counter.Props) => (
+        <div>
+          Count: {count}
+          <button id="increment" onClick={increment}>+</button>
+          <button id="decrement" onClick={decrement}>-</button>
+        </div>
+      )}
+    </Counter>
+  )
+}].forEach(({ description, factory }) => {
 
-it("should render correctly using implicit children", () => {
-  const rendering = renderer.create(
-    <Component name={"alice"}>
-      {({ name }) => <span>{name}</span>}
-    </Component>
-  ).toJSON();
-  expect(rendering).toMatchSnapshot();
+  describe(description, () => {
+
+    it("should render without crashing", () => {
+      shallow(factory());
+    });
+
+    it("should increment the counter", () => {
+      const wrapper = shallow(factory());
+      expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 0/));
+      wrapper.find("#increment").simulate("click");
+      expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 1/));
+    });
+
+    it("should decrement the counter", () => {
+      const wrapper = shallow(factory());
+      expect(wrapper.html()).toEqual(expect.stringMatching(/Count: 0/));
+      wrapper.find("#decrement").simulate("click");
+      expect(wrapper.html()).toEqual(expect.stringMatching(/Count: -1/));
+    });
+
+    it("should render correctly", () => {
+      const rendering = renderer.create(factory()).toJSON();
+      expect(rendering).toMatchSnapshot();
+    });
+  });
 });
