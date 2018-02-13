@@ -3,7 +3,7 @@ import * as React from "react";
 import * as renderer from "react-test-renderer";
 import { Observable } from "rxjs";
 import { mapTo } from "rxjs/operators/mapTo";
-import { transformEvent } from "./TransformEvent";
+import { transformEvent } from "./transformEvent";
 
 type Event = React.MouseEvent<HTMLButtonElement>;
 const Transform = transformEvent((event$: Observable<Event>) => event$.pipe(mapTo({

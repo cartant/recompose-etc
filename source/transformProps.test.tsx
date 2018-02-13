@@ -8,8 +8,8 @@ import { merge } from "rxjs/observable/merge";
 import { mapTo } from "rxjs/operators/mapTo";
 import { scan } from "rxjs/operators/scan";
 import { startWith } from "rxjs/operators/startWith";
-import { transformProps } from "./transformProps";
 import { rxjsObservableConfig } from "./rxjsObservableConfig";
+import { transformProps } from "./transformProps";
 
 const Counter = transformProps((props$: Observable<{}>) => {
   const createEventHandler = createEventHandlerWithConfig(rxjsObservableConfig);
