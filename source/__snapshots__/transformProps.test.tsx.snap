@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly using implicit children 1`] = `
+<span>
+  bob
+</span>
+`;
+
+exports[`should render correctly using the children prop 1`] = `
+<span>
+  bob
+</span>
+`;
