@@ -1,39 +1,50 @@
 import { shallow } from "enzyme";
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import { componentWithChildrenFromStream } from "./componentWithChildrenFromStream";
+import { renderFromStream } from "./renderFromStream";
 import { counterPropsFromStream } from "./testing/counter";
 
-const Counter = componentWithChildrenFromStream(counterPropsFromStream);
-const factoryWithChildren = () => (
-  <Counter>
-    {({ count, increment, decrement }: typeof Counter.ChildProps) => (
-      <div>
-        Count: {count}
-        <button id="increment" onClick={increment}>+</button>
-        <button id="decrement" onClick={decrement}>-</button>
-      </div>
-    )}
-  </Counter>
-);
-const factoryWithProp = () => (
-  <Counter
-    children={({ count, increment, decrement }) => (
-      <div>
-        Count: {count}
-        <button id="increment" onClick={increment}>+</button>
-        <button id="decrement" onClick={decrement}>-</button>
-      </div>
-    )}
-  />
-);
+const Counter = renderFromStream(counterPropsFromStream);
 
 [{
-  description: "using implicit children",
-  factory: factoryWithChildren
+  description: "using the render prop",
+  factory: () => (
+    <Counter
+      render={({ count, increment, decrement }) => (
+        <div>
+          Count: {count}
+          <button id="increment" onClick={increment}>+</button>
+          <button id="decrement" onClick={decrement}>-</button>
+        </div>
+      )}
+    />
+  )
 }, {
   description: "using the children prop",
-  factory: factoryWithProp
+  factory: () => (
+    <Counter
+      children={({ count, increment, decrement }) => (
+        <div>
+          Count: {count}
+          <button id="increment" onClick={increment}>+</button>
+          <button id="decrement" onClick={decrement}>-</button>
+        </div>
+      )}
+    />
+  )
+}, {
+  description: "using the implicit children",
+  factory: () => (
+    <Counter>
+      {({ count, increment, decrement }: typeof Counter.Props) => (
+        <div>
+          Count: {count}
+          <button id="increment" onClick={increment}>+</button>
+          <button id="decrement" onClick={decrement}>-</button>
+        </div>
+      )}
+    </Counter>
+  )
 }].forEach(({ description, factory }) => {
 
   describe(description, () => {

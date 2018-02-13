@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`using implicit children should render correctly 1`] = `
+exports[`using the children prop should render correctly 1`] = `
 <div>
   Count: 
   0
@@ -19,7 +19,26 @@ exports[`using implicit children should render correctly 1`] = `
 </div>
 `;
 
-exports[`using the children prop should render correctly 1`] = `
+exports[`using the implicit children should render correctly 1`] = `
+<div>
+  Count: 
+  0
+  <button
+    id="increment"
+    onClick={[Function]}
+  >
+    +
+  </button>
+  <button
+    id="decrement"
+    onClick={[Function]}
+  >
+    -
+  </button>
+</div>
+`;
+
+exports[`using the render prop should render correctly 1`] = `
 <div>
   Count: 
   0

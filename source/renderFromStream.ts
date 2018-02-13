@@ -12,18 +12,20 @@ import { map } from "rxjs/operators/map";
 import { withLatestFrom } from "rxjs/operators/withLatestFrom";
 import { rxjsObservableConfig } from "./rxjsObservableConfig";
 
-export function componentWithRenderFromStream<TProps, TRenderProps>(
+export type RenderProps = "children" | "render";
+
+export function renderFromStream<TProps, TRenderProps>(
   propsToReactNode: mapper<Subscribable<TProps>, Observable<TRenderProps>>
-): React.ComponentType<TProps & { render: (props: TRenderProps) => React.ReactNode }> {
+): React.ComponentType<TProps & { [prop in RenderProps]?: (props: TRenderProps) => React.ReactNode }> & { Props: TRenderProps } {
   const componentFromStream = componentFromStreamWithConfig(rxjsObservableConfig);
-  const Component = componentFromStream<TProps & { render: (props: TRenderProps) => React.ReactNode }>(
+  const Component = componentFromStream<TProps & { [prop in RenderProps]: (props: TRenderProps) => React.ReactNode }>(
     props$ => from(propsToReactNode(props$)).pipe(
       withLatestFrom(props$),
-      map(([renderProps, props]) => props.render(renderProps))
+      map(([renderProps, props]) => (props.render || props.children)(renderProps))
     )
   );
   if (process.env.NODE_ENV !== "production") {
-    return setDisplayName(wrapDisplayName(Component, "componentWithRenderFromStream"))(Component) as any;
+    return setDisplayName(wrapDisplayName(Component, "renderFromStream"))(Component) as any;
   }
-  return Component;
+  return Component as any;
 }
