@@ -95,7 +95,7 @@ describe("distinct using comparer", () => {
   }));
 });
 
-describe("distinct and mapped", () => {
+describe("distinct and transformed", () => {
 
   type Event = React.ChangeEvent<HTMLInputElement>;
   const Debounce = debounceEvent<Event, string>(100, true, event => event.target.value);
