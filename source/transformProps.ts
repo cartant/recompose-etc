@@ -3,7 +3,6 @@ import {
   componentFromStreamWithConfig,
   mapper,
   setDisplayName,
-  Subscribable,
   wrapDisplayName
 } from "recompose";
 import { Observable } from "rxjs/Observable";
@@ -14,11 +13,11 @@ import { rxjsObservableConfig } from "./rxjsObservableConfig";
 import { RenderProp } from "./types";
 
 export function transformProps<TProps, TRenderProps>(
-  propsToReactNode: mapper<Subscribable<TProps>, Observable<TRenderProps>>
+  propsToReactNode: mapper<Observable<TProps>, Observable<TRenderProps>>
 ): React.ComponentType<TProps & RenderProp<TRenderProps>> & { Props: TRenderProps } {
   const componentFromStream = componentFromStreamWithConfig(rxjsObservableConfig);
   const Component = componentFromStream<TProps & RenderProp<TRenderProps>>(
-    props$ => from(propsToReactNode(props$)).pipe(
+    props$ => propsToReactNode(from(props$)).pipe(
       withLatestFrom(props$),
       map(([renderProps, props]) => {
         if (process.env.NODE_ENV !== "production") {
