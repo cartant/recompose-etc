@@ -2748,6 +2748,10 @@ rst-selector-parser@^2.2.3:
     lodash.flattendeep "^4.4.0"
     nearley "^2.7.10"
 
+rxjs-etc@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/rxjs-etc/-/rxjs-etc-3.3.0.tgz#606c9b3bf8c2228754b2519ab9ba941df5912ffa"
+
 rxjs-marbles@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/rxjs-marbles/-/rxjs-marbles-2.3.0.tgz#749fa477ae34808f0d6f18b1eb4f0ebd3dd61f38"
