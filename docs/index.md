@@ -14,7 +14,7 @@ At the moment, `recompose-etc` is something of an experiment. It seems interesti
 `transformProps` applies an RxJS-based transform to the properties passed from the parent component to a child - via a render prop. The render props can be specified using the `render` property, the `children` property or using a child function. An example might look something like this:
 
 ```tsx
-const Component = transformProps(prop$ => prop$.pipe(auditTime(0, animationFrame)));
+const Component = transformProps(props$ => props$.pipe(auditTime(0, animationFrame)));
 const element =
   <Component
     auditedValue={highFreqValue}
@@ -27,7 +27,7 @@ The specified transform could apply any structural or temporal RxJS transformati
 `transformEvent` applies an RxJS-based transform to an event passed from a child to a parent - via a handler function. An example might look something like this:
 
 ```tsx
-const Component = transformEvent(prop$ => prop$.pipe(
+const Component = transformEvent(event$ => event$.pipe(
   debounceTime(1000),
   distinctUntilChanged((left, right) => left.target.value === right.target.value)
 ));
