@@ -27,7 +27,10 @@ The specified transform could apply any structural or temporal RxJS transformati
 `transformEvent` applies an RxJS-based transform to an event passed from a child to a parent - via a handler function. An example might look something like this:
 
 ```tsx
-const Component = transformEvent(prop$ => prop$.pipe(debounceTime(1000)));
+const Component = transformEvent(prop$ => prop$.pipe(
+  debounceTime(1000),
+  distinctUntilChanged((left, right) => left.target.value === right.target.value)
+));
 const element =
   <Component
     handler={handleChange}
