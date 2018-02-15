@@ -1,6 +1,7 @@
 {
   "devDependencies": {},
   "es2015": "./esm2015/index.js",
+  "jest": {},
   "main": "./index.js",
   "module": "./esm5/index.js",
   "private": false,
