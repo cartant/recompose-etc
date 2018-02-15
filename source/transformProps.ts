@@ -17,19 +17,19 @@ import { withLatestFrom } from "rxjs/operators/withLatestFrom";
 import { rxjsObservableConfig } from "./rxjsObservableConfig";
 import { RenderProp } from "./types";
 
-export function transformProps<TProps, TRenderProps>(
-  propsToReactNode: mapper<Observable<TProps>, Observable<TRenderProps>>
-): React.ComponentType<TProps & RenderProp<TRenderProps>> & { Props: TRenderProps };
+export function transformProps<TOuterProps, TInnerProps>(
+  propsToReactNode: mapper<Observable<TOuterProps>, Observable<TInnerProps>>
+): React.ComponentType<TOuterProps & RenderProp<TInnerProps>> & { Props: TInnerProps };
 
 export function transformProps<TProps>(
   propsToReactNode: mapper<Observable<TProps>, Observable<TProps>>
 ): React.ComponentType<TProps & RenderProp<TProps>> & { Props: TProps };
 
-export function transformProps<TProps, TRenderProps>(
-  propsToReactNode: mapper<Observable<TProps>, Observable<TRenderProps>>
-): React.ComponentType<TProps & RenderProp<TRenderProps>> & { Props: TRenderProps } {
+export function transformProps<TOuterProps, TInnerProps>(
+  propsToReactNode: mapper<Observable<TOuterProps>, Observable<TInnerProps>>
+): React.ComponentType<TOuterProps & RenderProp<TInnerProps>> & { Props: TInnerProps } {
   const componentFromStream = componentFromStreamWithConfig(rxjsObservableConfig);
-  const Component = componentFromStream<TProps & RenderProp<TRenderProps>>(
+  const Component = componentFromStream<TOuterProps & RenderProp<TInnerProps>>(
     props$ => propsToReactNode(from(props$)).pipe(
       withLatestFrom(props$),
       map(([renderProps, props]) => {
