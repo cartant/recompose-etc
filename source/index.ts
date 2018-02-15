@@ -5,6 +5,6 @@
 
 export { debounceEvent } from "./debounceEvent";
 export { debounceProps } from "./debounceProps";
-export { limitFrameRate } from "./limitFrameRate";
+export { limitToFrameRate } from "./limitToFrameRate";
 export { transformEvent } from "./transformEvent";
 export { transformProps } from "./transformProps";

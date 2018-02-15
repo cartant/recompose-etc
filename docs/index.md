@@ -35,4 +35,4 @@ const element =
   />;
 ```
 
-The package's `debounceEvent`, `debounceProps` and `limitFrameRate` build upon the base component factories, incorporating some specifically-composed observables.
+The package's `debounceEvent`, `debounceProps` and `limitToFrameRate` build upon the base component factories, incorporating some specifically-composed observables.

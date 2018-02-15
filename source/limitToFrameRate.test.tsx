@@ -7,10 +7,10 @@ import { shallow } from "enzyme";
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 import { marbles } from "rxjs-marbles";
-import { limitFrameRate } from "./limitFrameRate";
+import { limitToFrameRate } from "./limitToFrameRate";
 
 type Props = { name: string };
-const Limit = limitFrameRate<Props>();
+const Limit = limitToFrameRate<Props>();
 
 it("should limit renders", marbles((m) => {
   m.autoFlush = false;

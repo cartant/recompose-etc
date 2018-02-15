@@ -16,7 +16,7 @@ import { HandlerProp, RenderProp } from "./types";
 
 // https://github.com/facebook/react/issues/11171
 
-export function limitFrameRate<TProps>(): React.ComponentType<
+export function limitToFrameRate<TProps>(): React.ComponentType<
   TProps &
   RenderProp<TProps>
 > & { Props: TProps } {
@@ -26,7 +26,7 @@ export function limitFrameRate<TProps>(): React.ComponentType<
     ))
   ));
   if (process.env.NODE_ENV !== "production") {
-    return setDisplayName<any>(wrapDisplayName(Component, "limitFrameRate"))(Component) as any;
+    return setDisplayName<any>(wrapDisplayName(Component, "limitToFrameRate"))(Component) as any;
   }
   return Component;
 }
