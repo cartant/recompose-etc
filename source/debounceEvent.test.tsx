@@ -80,6 +80,7 @@ describe("distinct using comparer", () => {
   const Debounce = debounceEvent<Event>(100, (left, right) => left.target["value"] === right.target["value"]);
 
   it("should debounce events", marbles((m) => {
+    m.autoFlush = false;
     m.bind();
     let changeEvents: any[] = [];
     const wrapper = shallow(

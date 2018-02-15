@@ -15,6 +15,7 @@ describe("not distinct", () => {
   const Debounce = debounceProps<Props>(100);
 
   it("should debounce props", marbles((m) => {
+    m.autoFlush = false;
     m.bind();
     const receivedNames: string[] = [];
     let props: Props & { render: (props: Props) => React.ReactNode } = {
@@ -63,6 +64,7 @@ describe("distinct", () => {
   const Debounce = debounceProps<Props>(100, (left, right) => left.name === right.name);
 
   it("should debounce props", marbles((m) => {
+    m.autoFlush = false;
     m.bind();
     const receivedNames: string[] = [];
     let props: Props & { render: (props: Props) => React.ReactNode } = {
@@ -116,6 +118,7 @@ describe("distinct and transformed", () => {
   );
 
   it("should debounce props", marbles((m) => {
+    m.autoFlush = false;
     m.bind();
     const receivedNames: string[] = [];
     let props: OuterProps & { render: (props: InnerProps) => React.ReactNode } = {
