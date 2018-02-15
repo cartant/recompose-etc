@@ -1,5 +1,11 @@
 # recompose-etc
 
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cartant/recompose-etc/blob/master/LICENSE)
+[![NPM version](https://img.shields.io/npm/v/recompose-etc.svg)](https://www.npmjs.com/package/recompose-etc)
+[![Build status](https://img.shields.io/travis/cartant/recompose-etc.svg)](http://travis-ci.org/cartant/recompose-etc)
+[![dependency status](https://img.shields.io/david/cartant/recompose-etc.svg)](https://david-dm.org/cartant/recompose-etc)
+[![devDependency Status](https://img.shields.io/david/dev/cartant/recompose-etc.svg)](https://david-dm.org/cartant/recompose-etc#info=devDependencies)
+[![peerDependency Status](https://img.shields.io/david/peer/cartant/recompose-etc.svg)](https://david-dm.org/cartant/recompose-etc#info=peerDependencies)
 [![Greenkeeper badge](https://badges.greenkeeper.io/cartant/recompose-etc.svg)](https://greenkeeper.io/)
 
 ### What is it?

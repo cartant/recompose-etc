@@ -1,5 +1,3 @@
-# recompose-etc
-
 ### What is it?
 
 A bunch of RxJS-based React components that build on those in [`recompose`](https://github.com/acdlite/recompose).
