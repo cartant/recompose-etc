@@ -4,7 +4,11 @@
  */
 
 import * as React from "react";
-import { mapper } from "recompose";
+import {
+  mapper,
+  setDisplayName,
+  wrapDisplayName
+} from "recompose";
 import { distinctUntilChanged } from "rxjs/operators/distinctUntilChanged";
 import { map } from "rxjs/operators/map";
 import { debounceTimeSubsequent } from "rxjs-etc/operators/debounceTimeSubsequent";
@@ -46,5 +50,11 @@ export function debounceProps<TOuterProps, TInnerProps>(
   if (distinct) {
     operators.push(distinctUntilChanged(distinct));
   }
-  return transformProps(props$ => props$.pipe(pipeFromArray(operators)));
+  const Component = transformProps<TOuterProps, TInnerProps>(
+    props$ => props$.pipe(pipeFromArray(operators))
+  );
+  if (process.env.NODE_ENV !== "production") {
+    return setDisplayName<any>(wrapDisplayName(Component, "debounceProps"))(Component) as any;
+  }
+  return Component;
 }

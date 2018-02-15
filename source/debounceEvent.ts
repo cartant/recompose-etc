@@ -4,7 +4,11 @@
  */
 
 import * as React from "react";
-import { mapper } from "recompose";
+import {
+  mapper,
+  setDisplayName,
+  wrapDisplayName
+} from "recompose";
 import { debounceTime } from "rxjs/operators/debounceTime";
 import { distinctUntilChanged } from "rxjs/operators/distinctUntilChanged";
 import { map } from "rxjs/operators/map";
@@ -49,7 +53,13 @@ export function debounceEvent<TInnerEvent, TOuterEvent>(
     const comparer = (typeof distinct === "function") ? distinct : defaultEqualComparer;
     operators.push(distinctUntilChanged(comparer));
   }
-  return transformEvent(event$ => event$.pipe(pipeFromArray(operators)));
+  const Component = transformEvent<TInnerEvent, TOuterEvent>(
+    event$ => event$.pipe(pipeFromArray(operators))
+  );
+  if (process.env.NODE_ENV !== "production") {
+    return setDisplayName<any>(wrapDisplayName(Component, "debounceEvent"))(Component) as any;
+  }
+  return Component;
 }
 
 function defaultEqualComparer(left: any, right: any): boolean {
