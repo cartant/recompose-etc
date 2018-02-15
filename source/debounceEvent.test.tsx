@@ -15,6 +15,7 @@ describe("duration only", () => {
   const Debounce = debounceEvent<Event>(100);
 
   it("should debounce events", marbles((m) => {
+    m.autoFlush = false;
     m.bind();
     let changeEvents: any[] = [];
     const wrapper = shallow(
@@ -54,6 +55,7 @@ describe("default distinct", () => {
   const Debounce = debounceEvent<Event>(100, true);
 
   it("should debounce events", marbles((m) => {
+    m.autoFlush = false;
     m.bind();
     let changeEvents: any[] = [];
     const wrapper = shallow(
@@ -107,6 +109,7 @@ describe("distinct and transformed", () => {
   const Debounce = debounceEvent<Event, string>(100, true, event => event.target["value"]);
 
   it("should debounce events", marbles((m) => {
+    m.autoFlush = false;
     m.bind();
     let changeEvents: any[] = [];
     const wrapper = shallow(
