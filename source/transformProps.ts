@@ -19,6 +19,14 @@ import { RenderProp } from "./types";
 
 export function transformProps<TProps, TRenderProps>(
   propsToReactNode: mapper<Observable<TProps>, Observable<TRenderProps>>
+): React.ComponentType<TProps & RenderProp<TRenderProps>> & { Props: TRenderProps };
+
+export function transformProps<TProps>(
+  propsToReactNode: mapper<Observable<TProps>, Observable<TProps>>
+): React.ComponentType<TProps & RenderProp<TProps>> & { Props: TProps };
+
+export function transformProps<TProps, TRenderProps>(
+  propsToReactNode: mapper<Observable<TProps>, Observable<TRenderProps>>
 ): React.ComponentType<TProps & RenderProp<TRenderProps>> & { Props: TRenderProps } {
   const componentFromStream = componentFromStreamWithConfig(rxjsObservableConfig);
   const Component = componentFromStream<TProps & RenderProp<TRenderProps>>(

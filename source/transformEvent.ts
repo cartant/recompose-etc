@@ -26,6 +26,20 @@ export function transformEvent<TInnerEvent, TOuterEvent>(
 ): React.ComponentType<
   HandlerProp<TOuterEvent> &
   RenderProp<HandlerProp<TInnerEvent>>
+> & { Props: HandlerProp<TInnerEvent> };
+
+export function transformEvent<TEvent>(
+  transform: mapper<Observable<TEvent>, Observable<TEvent>>
+): React.ComponentType<
+  HandlerProp<TEvent> &
+  RenderProp<HandlerProp<TEvent>>
+> & { Props: HandlerProp<TEvent> };
+
+export function transformEvent<TInnerEvent, TOuterEvent>(
+  transform: mapper<Observable<TInnerEvent>, Observable<TOuterEvent>>
+): React.ComponentType<
+  HandlerProp<TOuterEvent> &
+  RenderProp<HandlerProp<TInnerEvent>>
 > & { Props: HandlerProp<TInnerEvent> } {
   const createEventHandler = createEventHandlerWithConfig(rxjsObservableConfig);
   const componentFromStream = componentFromStreamWithConfig(rxjsObservableConfig);
