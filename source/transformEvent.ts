@@ -1,3 +1,8 @@
+/**
+ * @license Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://github.com/cartant/recompose-etc
+ */
+
 import * as React from "react";
 import {
   createEventHandlerWithConfig,
@@ -42,7 +47,7 @@ export function transformEvent<TInnerEvent, TOuterEvent>(
               /*tslint:enable*/
             }
           }
-          return (props.render || props.children)({ handler: innerHandler });
+          return (props.render! || props.children!)({ handler: innerHandler });
         })
       ),
       transform(from(innerEvent$)).pipe(
@@ -53,7 +58,7 @@ export function transformEvent<TInnerEvent, TOuterEvent>(
     );
   });
   if (process.env.NODE_ENV !== "production") {
-    return setDisplayName(wrapDisplayName(Component, "transformEvent"))(Component) as any;
+    return setDisplayName<any>(wrapDisplayName(Component, "transformEvent"))(Component) as any;
   }
   return Component as any;
 }

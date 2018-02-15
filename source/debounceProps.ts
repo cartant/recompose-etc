@@ -1,3 +1,8 @@
+/**
+ * @license Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://github.com/cartant/recompose-etc
+ */
+
 import * as React from "react";
 import { mapper } from "recompose";
 import { distinctUntilChanged } from "rxjs/operators/distinctUntilChanged";

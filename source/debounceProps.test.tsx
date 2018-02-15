@@ -1,3 +1,8 @@
+/**
+ * @license Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://github.com/cartant/recompose-etc
+ */
+
 import { shallow } from "enzyme";
 import * as React from "react";
 import * as renderer from "react-test-renderer";
@@ -6,12 +11,13 @@ import { debounceProps } from "./debounceProps";
 
 describe("not distinct", () => {
 
-  const Debounce = debounceProps<{ name: string }>(100);
+  type Props = { name: string };
+  const Debounce = debounceProps<Props>(100);
 
   it("should debounce props", marbles((m) => {
     m.bind();
     const receivedNames: string[] = [];
-    let props = {
+    let props: Props & { render: (props: Props) => React.ReactNode } = {
       name: "alice",
       render: ({ name }) => {
         receivedNames.push(name);
@@ -53,12 +59,13 @@ describe("not distinct", () => {
 
 describe("distinct", () => {
 
-  const Debounce = debounceProps<{ name: string }>(100, (left, right) => left.name === right.name);
+  type Props = { name: string };
+  const Debounce = debounceProps<Props>(100, (left, right) => left.name === right.name);
 
   it("should debounce props", marbles((m) => {
     m.bind();
     const receivedNames: string[] = [];
-    let props = {
+    let props: Props & { render: (props: Props) => React.ReactNode } = {
       name: "alice",
       render: ({ name }) => {
         receivedNames.push(name);
@@ -100,7 +107,9 @@ describe("distinct", () => {
 
 describe("distinct and transformed", () => {
 
-  const Debounce = debounceProps<{ name: string }, { firstName: string }>(
+  type OuterProps = { name: string };
+  type InnerProps = { firstName: string };
+  const Debounce = debounceProps<OuterProps, InnerProps>(
     100,
     (left, right) => left.firstName === right.firstName,
     ({ name }) => ({ firstName: name })
@@ -109,7 +118,7 @@ describe("distinct and transformed", () => {
   it("should debounce props", marbles((m) => {
     m.bind();
     const receivedNames: string[] = [];
-    let props = {
+    let props: OuterProps & { render: (props: InnerProps) => React.ReactNode } = {
       name: "alice",
       render: ({ firstName }) => {
         receivedNames.push(firstName);

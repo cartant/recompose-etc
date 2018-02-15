@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {},
+  "exclude": [
+    "source/**/*.test.ts",
+    "source/**/*.test.tsx"
+  ],
+  "extends": "./tsconfig.json"
+}

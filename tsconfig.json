@@ -1,5 +1,24 @@
 {
   "compilerOptions": {
-    "jsx": "react"
-  }
+    "declaration": false,
+    "importHelpers": false,
+    "jsx": "react",
+    "lib": ["es2015"],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "noEmitHelpers": false,
+    "noImplicitAny": true,
+    "outDir": "build",
+    "removeComments": true,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "strict": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es2015"
+  },
+  "exclude": [],
+  "include": [
+    "source/**/*.ts",
+    "source/**/*.tsx"
+  ]
 }

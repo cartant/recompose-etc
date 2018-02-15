@@ -1,3 +1,8 @@
+/**
+ * @license Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://github.com/cartant/recompose-etc
+ */
+
 import { shallow } from "enzyme";
 import * as React from "react";
 import * as renderer from "react-test-renderer";
@@ -72,7 +77,7 @@ describe("default distinct", () => {
 describe("distinct using comparer", () => {
 
   type Event = React.ChangeEvent<HTMLInputElement>;
-  const Debounce = debounceEvent<Event>(100, (left, right) => left.target.value === right.target.value);
+  const Debounce = debounceEvent<Event>(100, (left, right) => left.target["value"] === right.target["value"]);
 
   it("should debounce events", marbles((m) => {
     m.bind();
@@ -98,7 +103,7 @@ describe("distinct using comparer", () => {
 describe("distinct and transformed", () => {
 
   type Event = React.ChangeEvent<HTMLInputElement>;
-  const Debounce = debounceEvent<Event, string>(100, true, event => event.target.value);
+  const Debounce = debounceEvent<Event, string>(100, true, event => event.target["value"]);
 
   it("should debounce events", marbles((m) => {
     m.bind();
