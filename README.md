@@ -1,5 +1,7 @@
 # recompose-etc
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/cartant/recompose-etc.svg)](https://greenkeeper.io/)
+
 ### What is it?
 
 A bunch of RxJS-based React components that build on those in [`recompose`](https://github.com/acdlite/recompose).
