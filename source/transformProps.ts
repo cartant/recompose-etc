@@ -12,8 +12,7 @@ import {
 } from "recompose";
 import { Observable } from "rxjs/Observable";
 import { from } from "rxjs/observable/from";
-import { map } from "rxjs/operators/map";
-import { withLatestFrom } from "rxjs/operators/withLatestFrom";
+import { map, withLatestFrom } from "rxjs/operators";
 import { rxjsObservableConfig } from "./rxjsObservableConfig";
 import { RenderProp } from "./types";
 

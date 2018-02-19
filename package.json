@@ -23,8 +23,10 @@
     "recompose": "^0.26.0",
     "rxjs": "^5.5.6",
     "rxjs-marbles": "^2.3.0",
+    "rxjs-tslint-rules": "^3.13.0",
     "ts-jest": "^22.0.4",
     "ts-loader": "^3.5.0",
+    "tslint": "^5.9.1",
     "typescript": "~2.7.1",
     "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.11.0",
@@ -78,14 +80,15 @@
     "url": "https://github.com/cartant/recompose-etc.git"
   },
   "scripts": {
-    "dist": "yarn run dist:build && yarn run dist:copy",
+    "dist": "yarn run lint && yarn run dist:build && yarn run dist:copy",
     "dist:build": "yarn run dist:clean && yarn run dist:build:cjs && yarn run dist:build:esm2015 && yarn run dist:build:esm5 && webpack --config webpack.config.js && webpack --config webpack.config.js --env.production",
     "dist:build:cjs": "tsc -p tsconfig-dist-cjs.json",
     "dist:build:esm2015": "tsc -p tsconfig-dist-esm2015.json",
     "dist:build:esm5": "tsc -p tsconfig-dist-esm5.json",
     "dist:clean": "rimraf dist && rimraf bundles/recompose-etc.* && mkdirp bundles",
     "dist:copy": "node scripts/pack.js && cpy bundles/recompose-etc.* dist/bundles/ && cpy CHANGELOG.md LICENSE README.md dist/",
-    "test": "jest"
+    "lint": "tslint --project tsconfig.json source/**/*.ts",
+    "test": "yarn run lint && jest"
   },
   "types": "./dist/index.d.ts",
   "unpkg": "./bundles/recompose-etc.min.umd.js",

@@ -9,10 +9,12 @@ import {
   setDisplayName,
   wrapDisplayName
 } from "recompose";
-import { debounceTime } from "rxjs/operators/debounceTime";
-import { distinctUntilChanged } from "rxjs/operators/distinctUntilChanged";
-import { map } from "rxjs/operators/map";
-import { tap } from "rxjs/operators/tap";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  tap
+} from "rxjs/operators";
 import { pipeFromArray } from "rxjs/util/pipe";
 import { transformEvent } from "./transformEvent";
 import { EqualComparer, HandlerProp, RenderProp } from "./types";
