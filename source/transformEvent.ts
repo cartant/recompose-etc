@@ -14,12 +14,10 @@ import {
 import { Observable } from "rxjs/Observable";
 import { from } from "rxjs/observable/from";
 import { merge } from "rxjs/observable/merge";
-import {
-  ignoreElements,
-  map,
-  tap,
-  withLatestFrom
-} from "rxjs/operators";
+import { ignoreElements } from "rxjs/operators/ignoreElements";
+import { map } from "rxjs/operators/map";
+import { tap } from "rxjs/operators/tap";
+import { withLatestFrom } from "rxjs/operators/withLatestFrom";
 import { rxjsObservableConfig } from "./rxjsObservableConfig";
 import { HandlerProp, RenderProp } from "./types";
 

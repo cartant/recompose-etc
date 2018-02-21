@@ -8,7 +8,7 @@ import {
   setDisplayName,
   wrapDisplayName
 } from "recompose";
-import { auditTime } from "rxjs/operators";
+import { auditTime } from "rxjs/operators/auditTime";
 import { animationFrame } from "rxjs/scheduler/animationFrame";
 import { subsequent } from "rxjs-etc/operators/subsequent";
 import { transformProps } from "./transformProps";

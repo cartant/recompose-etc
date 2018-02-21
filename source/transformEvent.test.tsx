@@ -6,7 +6,7 @@
 import { shallow } from "enzyme";
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import { Observable } from "rxjs";
+import { Observable } from "rxjs/Observable";
 import { mapTo } from "rxjs/operators/mapTo";
 import { transformEvent } from "./transformEvent";
 

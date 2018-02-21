@@ -4036,8 +4036,8 @@ rxjs-marbles@^2.3.0:
     lodash-es "^4.0.0"
 
 rxjs-tslint-rules@^3.13.0:
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/rxjs-tslint-rules/-/rxjs-tslint-rules-3.13.1.tgz#97116b9e03004e4e0e60ae1978c243400d963215"
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/rxjs-tslint-rules/-/rxjs-tslint-rules-3.14.0.tgz#ba7dca949b56c75aa66ddc8827e3971b6b920e40"
   dependencies:
     decamelize "^2.0.0"
     resolve "^1.4.0"

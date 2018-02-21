@@ -9,7 +9,8 @@ import {
   setDisplayName,
   wrapDisplayName
 } from "recompose";
-import { distinctUntilChanged, map } from "rxjs/operators";
+import { distinctUntilChanged } from "rxjs/operators/distinctUntilChanged";
+import { map } from "rxjs/operators/map";
 import { debounceTimeSubsequent } from "rxjs-etc/operators/debounceTimeSubsequent";
 import { pipeFromArray } from "rxjs/util/pipe";
 import { transformProps } from "./transformProps";
