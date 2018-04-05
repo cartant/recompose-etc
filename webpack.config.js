@@ -37,7 +37,7 @@ module.exports = env => {
     },
     output: {
       filename,
-      library: "RecomposeEtc",
+      library: "recomposeEtc",
       libraryTarget: "umd",
       path: path.resolve(__dirname, "./bundles")
     },

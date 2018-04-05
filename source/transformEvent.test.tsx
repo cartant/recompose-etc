@@ -6,8 +6,8 @@
 import { shallow } from "enzyme";
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import { Observable } from "rxjs/Observable";
-import { mapTo } from "rxjs/operators/mapTo";
+import { Observable } from "rxjs";
+import { mapTo } from "rxjs/operators";
 import { transformEvent } from "./transformEvent";
 
 type Event = React.MouseEvent<HTMLButtonElement>;

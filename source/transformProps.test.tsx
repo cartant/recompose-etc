@@ -7,12 +7,8 @@ import { shallow } from "enzyme";
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 import { createEventHandlerWithConfig } from "recompose";
-import { Observable } from "rxjs/Observable";
-import { combineLatest } from "rxjs/observable/combineLatest";
-import { merge } from "rxjs/observable/merge";
-import { mapTo } from "rxjs/operators/mapTo";
-import { scan } from "rxjs/operators/scan";
-import { startWith } from "rxjs/operators/startWith";
+import { combineLatest, merge, Observable } from "rxjs";
+import { mapTo, scan, startWith } from "rxjs/operators";
 import { rxjsObservableConfig } from "./rxjsObservableConfig";
 import { transformProps } from "./transformProps";
 

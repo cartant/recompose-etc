@@ -4,9 +4,17 @@
  */
 
 import { ObservableConfig } from "recompose";
-import { from } from "rxjs/observable/from";
+import { from, observable } from "rxjs";
 
 export const rxjsObservableConfig: ObservableConfig = {
-  fromESObservable: from,
+  fromESObservable: source$ => {
+    source$[observable] = source$[observable] || self;
+    return from(source$);
+  },
   toESObservable: source$ => source$
 };
+
+function self(this: any): any {
+  /*tslint:disable-next-line:no-invalid-this*/
+  return this;
+}

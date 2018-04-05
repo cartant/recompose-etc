@@ -8,8 +8,8 @@ import {
   setDisplayName,
   wrapDisplayName
 } from "recompose";
-import { auditTime } from "rxjs/operators/auditTime";
-import { animationFrame } from "rxjs/scheduler/animationFrame";
+import { animationFrameScheduler } from "rxjs";
+import { auditTime } from "rxjs/operators";
 import { subsequent } from "rxjs-etc/operators/subsequent";
 import { transformProps } from "./transformProps";
 import { HandlerProp, RenderProp } from "./types";
@@ -22,7 +22,7 @@ export function limitToFrameRate<TProps>(): React.ComponentType<
 > & { Props: TProps } {
   const Component = transformProps<TProps>(props$ => props$.pipe(
     subsequent(1, source$ => source$.pipe(
-      auditTime(0, animationFrame)
+      auditTime(0, animationFrameScheduler)
     ))
   ));
   if (process.env.NODE_ENV !== "production") {
