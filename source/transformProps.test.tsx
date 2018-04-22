@@ -8,7 +8,7 @@ import * as React from "react";
 import * as renderer from "react-test-renderer";
 import { createEventHandlerWithConfig } from "recompose";
 import { combineLatest, merge, Observable } from "rxjs";
-import { mapTo, scan, startWith } from "rxjs/operators";
+import { map, mapTo, scan, startWith } from "rxjs/operators";
 import { rxjsObservableConfig } from "./rxjsObservableConfig";
 import { transformProps } from "./transformProps";
 
@@ -23,10 +23,8 @@ const Counter = transformProps((props$: Observable<{}>) => {
     startWith(0),
     scan((count, n) => count + n, 0)
   );
-  return combineLatest(
-    props$,
-    count$,
-    (props, count) => ({ ...props, count, increment, decrement })
+  return combineLatest(props$, count$).pipe(
+    map(([props, count]) => ({ ...props, count, increment, decrement }))
   );
 });
 
