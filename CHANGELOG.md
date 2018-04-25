@@ -11,3 +11,4 @@
 ### Breaking Changes
 
 * Upgrade to RxJS version 6.
+* Rename the UMD global to `recomposeEtc`.
