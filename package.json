@@ -4,7 +4,7 @@
     "url": "https://github.com/cartant/recompose-etc/issues"
   },
   "dependencies": {
-    "rxjs-etc": "6.0.0-rc.0"
+    "rxjs-etc": "6.0.0"
   },
   "description": "React function components and higher-order components based on recompose and RxJS",
   "devDependencies": {
@@ -21,9 +21,9 @@
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
     "recompose": "^0.27.0",
-    "rxjs": "^6.0.0-rc.0",
-    "rxjs-marbles": "^3.0.0-rc.1",
-    "rxjs-tslint-rules": "^4.0.0-rc.0",
+    "rxjs": "^6.0.0",
+    "rxjs-marbles": "^3.0.0",
+    "rxjs-tslint-rules": "^4.0.0",
     "ts-jest": "^22.0.4",
     "ts-loader": "^4.0.0",
     "tslint": "^5.9.1",
@@ -72,7 +72,7 @@
   "peerDependencies": {
     "react": "^16.2.0",
     "recompose": "^0.26.0",
-    "rxjs": "^6.0.0-rc.0"
+    "rxjs": "^6.0.0"
   },
   "private": true,
   "publishConfig": {
