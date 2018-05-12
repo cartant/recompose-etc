@@ -1,7 +1,8 @@
 {
   "defaultSeverity": "error",
   "extends": [
-    "rxjs-tslint-rules"
+    "rxjs-tslint-rules",
+    "tslint-etc"
   ],
   "jsRules": {},
   "rules": {
