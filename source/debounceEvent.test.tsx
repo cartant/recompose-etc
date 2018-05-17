@@ -6,8 +6,10 @@
 import { shallow } from "enzyme";
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import { marbles } from "rxjs-marbles";
+import { configure } from "rxjs-marbles";
 import { debounceEvent } from "./debounceEvent";
+
+const { marbles } = configure({ run: false });
 
 describe("duration only", () => {
 

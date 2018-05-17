@@ -22,7 +22,7 @@
     "react-test-renderer": "^16.2.0",
     "recompose": "^0.27.0",
     "rxjs": "^6.0.0",
-    "rxjs-marbles": "^3.0.0",
+    "rxjs-marbles": "^4.0.0",
     "rxjs-tslint-rules": "^4.0.0",
     "ts-jest": "^22.0.4",
     "ts-loader": "^4.0.0",
