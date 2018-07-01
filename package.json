@@ -24,7 +24,7 @@
     "rxjs": "^6.0.0",
     "rxjs-marbles": "^4.0.0",
     "rxjs-tslint-rules": "^4.0.0",
-    "ts-jest": "^22.0.4",
+    "ts-jest": "^23.0.0",
     "ts-loader": "^4.0.0",
     "tslint": "^5.9.1",
     "tslint-etc": "^1.2.2",
@@ -36,6 +36,7 @@
   "esm2015": "./dist/esm2015/index.js",
   "homepage": "https://github.com/cartant/recompose-etc",
   "jest": {
+    "moduleDirectories": ["./node_modules"],
     "moduleFileExtensions": [
       "ts",
       "tsx",
