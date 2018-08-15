@@ -59,8 +59,8 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.116.tgz#5ccf215653e3e8c786a58390751033a9adca0eb9"
 
 "@types/node@*":
-  version "10.5.8"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.8.tgz#6f14ccecad1d19332f063a6a764f8907801fece0"
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.7.0.tgz#d384b2c8625414ab2aa18fdf989c288d6a7a8202"
 
 "@types/prop-types@*":
   version "15.5.5"
@@ -75,8 +75,8 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^16.0.36":
-  version "16.4.9"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.9.tgz#98b4dba5a0419dbd594f5dbbb2479e1e153431bb"
+  version "16.4.10"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.10.tgz#fb577091034b25a81f829923e7d38258f43e3165"
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -921,8 +921,8 @@ chrome-trace-event@^1.0.0:
     tslib "^1.9.0"
 
 ci-info@^1.0.0:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-1.1.3.tgz#710193264bb05c77b8c90d02f5aaf22216a667b2"
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-1.3.0.tgz#ea8219b0355a58692b762baf1cdd76ceb4503283"
 
 cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   version "1.0.4"
@@ -1274,11 +1274,10 @@ default-require-extensions@^2.0.0:
     strip-bom "^3.0.0"
 
 define-properties@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.2.tgz#83a73f2fea569898fb737193c8f873caf6d45c94"
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.3.tgz#cf88da6cbee26fe6db7094f61d870cbd84cee9f1"
   dependencies:
-    foreach "^2.0.5"
-    object-keys "^1.0.8"
+    object-keys "^1.0.12"
 
 define-property@^0.2.5:
   version "0.2.5"
@@ -1819,10 +1818,6 @@ for-own@^0.1.4:
   resolved "https://registry.yarnpkg.com/for-own/-/for-own-0.1.5.tgz#5265c681a4f294dabbf17c9509b6763aa84510ce"
   dependencies:
     for-in "^1.0.1"
-
-foreach@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/foreach/-/foreach-2.0.5.tgz#0bee005018aeb260d0a3af3ae658dd0136ec1b99"
 
 forever-agent@~0.6.1:
   version "0.6.1"
@@ -3346,12 +3341,12 @@ needle@^2.2.1:
     sax "^1.2.4"
 
 neo-async@^2.5.0:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.2.tgz#489105ce7bc54e709d736b195f82135048c50fcc"
 
 nested-error-stacks@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.0.1.tgz#d2cc9fc5235ddb371fc44d506234339c8e4b0a4b"
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.0.tgz#0fbdcf3e13fe4994781280524f8b96b0cdff9c61"
 
 nice-try@^1.0.4:
   version "1.0.4"
@@ -3513,7 +3508,7 @@ object-is@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/object-is/-/object-is-1.0.1.tgz#0aa60ec9989a0b3ed795cf4d06f62cf1ad6539b6"
 
-object-keys@^1.0.11, object-keys@^1.0.8:
+object-keys@^1.0.11, object-keys@^1.0.12:
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.0.12.tgz#09c53855377575310cca62f55bb334abff7b3ed2"
 
@@ -4859,8 +4854,8 @@ uglify-to-browserify@~1.0.0:
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
 
 uglifyjs-webpack-plugin@^1.2.4:
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.2.7.tgz#57638dd99c853a1ebfe9d97b42160a8a507f9d00"
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.3.0.tgz#75f548160858163a08643e086d5fefe18a5d67de"
   dependencies:
     cacache "^10.0.4"
     find-cache-dir "^1.0.0"
