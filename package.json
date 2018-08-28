@@ -4,7 +4,7 @@
     "url": "https://github.com/cartant/recompose-etc/issues"
   },
   "dependencies": {
-    "rxjs-etc": "^8.0.0"
+    "rxjs-etc": "^9.0.0"
   },
   "description": "React function components and higher-order components based on recompose and RxJS",
   "devDependencies": {
