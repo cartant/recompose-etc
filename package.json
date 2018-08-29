@@ -20,7 +20,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
-    "recompose": "^0.28.0",
+    "recompose": "^0.29.0",
     "rxjs": "^6.0.0",
     "rxjs-marbles": "^4.0.0",
     "rxjs-tslint-rules": "^4.0.0",
