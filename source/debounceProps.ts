@@ -11,6 +11,7 @@ import {
 } from "recompose";
 import { distinctUntilChanged, map } from "rxjs/operators";
 import { debounceTimeSubsequent } from "rxjs-etc/operators/debounceTimeSubsequent";
+import { spread } from "rxjs-etc/operators/spread";
 import { transformProps } from "./transformProps";
 import { EqualComparer, HandlerProp, RenderProp } from "./types";
 
@@ -49,10 +50,10 @@ export function debounceProps<TOuterProps, TInnerProps>(
     operators.push(distinctUntilChanged(distinct));
   }
   const Component = transformProps<TOuterProps, TInnerProps>(
-    props$ => props$.pipe(...operators)
+    props$ => props$.pipe(spread(...operators))
   );
   if (process.env.NODE_ENV !== "production") {
-    return setDisplayName<any>(wrapDisplayName(Component, "debounceProps"))(Component) as any;
+    return setDisplayName(wrapDisplayName(Component, "debounceProps"))(Component as any) as any;
   }
   return Component;
 }

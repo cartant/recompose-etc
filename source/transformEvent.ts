@@ -11,7 +11,7 @@ import {
   setDisplayName,
   wrapDisplayName
 } from "recompose";
-import { from, merge, Observable } from "rxjs";
+import { from, merge, Observable, ObservableInput } from "rxjs";
 import { ignoreElements, map, tap, withLatestFrom } from "rxjs/operators";
 import { rxjsObservableConfig } from "./rxjsObservableConfig";
 import { HandlerProp, RenderProp } from "./types";
@@ -42,7 +42,11 @@ export function transformEvent<TInnerEvent, TOuterEvent>(
   const Component = componentFromStream<
     HandlerProp<TOuterEvent> &
     RenderProp<HandlerProp<TInnerEvent>>
-  >(props$ => {
+  >(subscribable => {
+    const props$ = from(subscribable as ObservableInput<
+      HandlerProp<TOuterEvent> &
+      RenderProp<HandlerProp<TInnerEvent>>
+    >);
     return merge(
       from(props$).pipe(
         map(props => {
@@ -67,7 +71,7 @@ export function transformEvent<TInnerEvent, TOuterEvent>(
     );
   });
   if (process.env.NODE_ENV !== "production") {
-    return setDisplayName<any>(wrapDisplayName(Component, "transformEvent"))(Component) as any;
+    return setDisplayName(wrapDisplayName(Component, "transformEvent"))(Component as any) as any;
   }
   return Component as any;
 }

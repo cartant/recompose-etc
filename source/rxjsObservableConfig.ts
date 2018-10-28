@@ -9,7 +9,7 @@ import { from, observable } from "rxjs";
 export const rxjsObservableConfig: ObservableConfig = {
   fromESObservable: source$ => {
     source$[observable] = source$[observable] || self;
-    return from(source$);
+    return from(source$ as any);
   },
   toESObservable: source$ => source$
 };

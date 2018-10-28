@@ -26,7 +26,7 @@ export function limitToFrameRate<TProps>(): React.ComponentType<
     ))
   ));
   if (process.env.NODE_ENV !== "production") {
-    return setDisplayName<any>(wrapDisplayName(Component, "limitToFrameRate"))(Component) as any;
+    return setDisplayName(wrapDisplayName(Component, "limitToFrameRate"))(Component as any) as any;
   }
   return Component;
 }
