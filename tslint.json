@@ -64,7 +64,6 @@
       ],
       "severity": "warning"
     },
-    "no-consecutive-blank-lines": { "severity": "error" },
     "no-construct": { "severity": "error" },
     "no-debugger": { "severity": "error" },
     "no-default-export": { "severity": "off" },
