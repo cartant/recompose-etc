@@ -8,9 +8,11 @@
 [![peerDependency Status](https://img.shields.io/david/peer/cartant/recompose-etc.svg)](https://david-dm.org/cartant/recompose-etc#info=peerDependencies)
 [![Greenkeeper badge](https://badges.greenkeeper.io/cartant/recompose-etc.svg)](https://greenkeeper.io/)
 
-### What is it?
+### What <s>is</s> was it?
 
 A bunch of RxJS-based React components that build on those in [`recompose`](https://github.com/acdlite/recompose).
+
+An experiment that - with the introduction of React Hooks - is now redundant.
 
 ### Why might you need it?
 
